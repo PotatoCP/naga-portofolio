@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.2",
     "@tailwindcss/vite": "^4.1.7",
     "motion": "^12.16.0",
     "nes.css": "^2.3.0",

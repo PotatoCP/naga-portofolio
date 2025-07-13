@@ -1,14 +1,17 @@
-import { experiences } from "@/lib/data";
+import { ReactNode } from 'react';
 
-type PortoBoxProps = (typeof experiences)[number];
+interface PortoBoxProps {
+  title: String;
+  children?: ReactNode;
+}
 
-export default function PortoBox({
-  title,
-  period,
-}: PortoBoxProps) {
-  <div className="nes-container with-title width: auto">
-    <p className="title">{title}</p>
+export default function PortoBox({ title, children }: PortoBoxProps) {
+  return (
+    <div className="nes-container with-title width: auto">
+      <p className="title">{title}</p>
 
-    
-  </div>
+      {children}
+
+    </div>
+  );
 }
