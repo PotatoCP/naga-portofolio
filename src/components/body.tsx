@@ -7,21 +7,21 @@ import { experiences, achievement, education } from "@/lib/data";
 export default function Body() {
   return (
     <main className="flex flex-col space-y-7 row-start-2 items-center sm:items-start w-full">
-      <PortoBox title="Experience">
+      <PortoBox key="exp-box" title="Experience">
         {experiences.map((experience) => (
           <Dropdown id={experience.id} title={experience.title}>
             <p className="text-sm">Period: {experience.period}</p>
           </Dropdown>
         ))}
       </PortoBox>
-      <PortoBox title="Achievement">
+      <PortoBox key="ach-box" title="Achievement">
         {achievement.map((achievement) => (
           <Dropdown id={achievement.id} title={achievement.title}>
             <p className="text-sm">Time: {achievement.time}</p>
           </Dropdown>
         ))}
       </PortoBox>
-      <PortoBox title="Education">
+      <PortoBox key="ed-box" title="Education">
         {education.map((education) => (
           <Dropdown id={education.id} title={education.institution}>
             <p className="text-sm">Period: {education.period}</p>
