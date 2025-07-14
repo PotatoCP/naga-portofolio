@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 interface PortoBoxProps {
-  title: String;
+  title: string;
   children?: ReactNode;
 }
 
@@ -11,7 +11,6 @@ export default function PortoBox({ title, children }: PortoBoxProps) {
       <p className="title">{title}</p>
 
       {children}
-
     </div>
   );
 }

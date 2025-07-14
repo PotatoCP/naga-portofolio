@@ -25,15 +25,14 @@ export const achievement = [
   {
     id: "ach-3",
     title: "ICPC Asia Jakarta 2022 Bronze Medalist",
-    time: "November 2022"
+    time: "November 2022",
   },
   {
     id: "ach-4",
-    title: "National Olympiad in Informatics (KSN) - Silver Medal",
+    title: "Indonesian Olympiad in Informatics (KSN) - Silver Medal",
     time: "November 2021",
   },
 ] as const;
-
 
 export const education = [
   {

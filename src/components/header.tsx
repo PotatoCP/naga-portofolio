@@ -1,12 +1,19 @@
+import SocialMedia from "./social-media";
+
 export default function Header() {
   return (
     <header className="flex flex-wrap Sborder-solid border-b-10 w-full">
-        <div className="text-[24px]">
-          Kenzie Raditya Tirtarahardja
-        </div>  
+      <div className="flex justify-between items-center w-full">
         <div>
-          Software Engineer
+          <div className="text-[24px]">
+            Kenzie Raditya Tirtarahardja
+          </div>  
+          <div>
+            Software Engineer
+          </div>
         </div>
-      </header>
+        <SocialMedia />
+      </div>
+    </header>
   );
 }
