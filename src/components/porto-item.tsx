@@ -1,5 +1,6 @@
 import { ReactNode, useState, useRef, useEffect } from "react";
 import autoAnimate from "@formkit/auto-animate";
+import Image from "next/image";
 
 interface PortoItemProps {
   id: string;
@@ -30,9 +31,11 @@ export default function Dropdown({ id, title, children }: PortoItemProps) {
           } inline-block transition-transform duration-200 mr-2`}
           aria-hidden="true"
         >
-          <img
-            src="arrow.png"
-            alt=">"
+          <Image
+            width={16}
+            height={16}
+            src="/arrow.png"
+            alt=""
             className="h-[1em] w-[1em] align-middle object-contain inline-block"
           />
         </span>
