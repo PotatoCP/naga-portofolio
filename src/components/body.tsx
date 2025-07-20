@@ -2,6 +2,7 @@
 
 import PortoBox from "./porto-box";
 import Dropdown from "./porto-item";
+import ItemCard from "./item-card";
 import { experiences, achievement, education } from "@/lib/data";
 
 export default function Body() {
@@ -11,7 +12,7 @@ export default function Body() {
         {experiences.map((experience) => (
           <Dropdown key={experience.id} title={experience.title}>
             <p className="text-sm">Period: {experience.period}</p>
-            <p className="text-sm">Description: {experience.desc}</p>
+            <ItemCard desc={experience.desc} itemKey={experience.id} />
           </Dropdown>
         ))}
       </PortoBox>
