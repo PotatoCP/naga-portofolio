@@ -26,18 +26,15 @@ export default function Dropdown({ title, children }: PortoItemProps) {
   return (
     <div ref={parent} className="mb-3">
       <strong className="dropdown-label inline-block" onClick={reveal}>
-        <span
-          className={`dropdown-arrow${
-            show ? " open" : ""
-          } inline-block transition-transform duration-200 mr-2`}
-          aria-hidden="true"
-        >
+        <span className="dropdown-arrow inline-block mr-2" aria-hidden="true">
           <Image
             width={16}
             height={16}
             src="/arrow.png"
             alt=""
-            className="h-[1em] w-[1em] align-middle object-contain inline-block"
+            className={`h-[1em] w-[1em] align-middle object-contain inline-block transition-transform duration-200 ${
+              show ? "rotate-90" : ""
+            }`}
           />
         </span>
         {title}

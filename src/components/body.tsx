@@ -11,9 +11,11 @@ export default function Body() {
         {experiences.map((experience) => (
           <Dropdown key={experience.id} title={experience.title}>
             <p className="text-sm">Period: {experience.period}</p>
+            <p className="text-sm">Description: {experience.desc}</p>
           </Dropdown>
         ))}
       </PortoBox>
+
       <PortoBox key="ach-box" title="Achievement">
         {achievement.map((achievement) => (
           <Dropdown key={achievement.id} title={achievement.title}>
@@ -21,6 +23,7 @@ export default function Body() {
           </Dropdown>
         ))}
       </PortoBox>
+
       <PortoBox key="ed-box" title="Education">
         {education.map((education) => (
           <Dropdown key={education.id} title={education.institution}>

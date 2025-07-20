@@ -3,11 +3,13 @@ export const experiences = [
     id: "exp-1",
     title: "Huawei HKRC - Research Intern",
     period: "February 2025 - February 2026",
+    desc: "Joined Huawei HKRC Web Engine team. Gained and utilized the skill of Rust programming language and parallelization.",
   },
   {
     id: "exp-2",
     title: "Jollybee - Member",
     period: "September 2022 - February 2025",
+    desc: "A member of Jollybee, a competitive programming community in Bina Nusantara University. Participated in various competitions during my membership. Involved in the competition held by Bina Nusantara University, such as BNPCHS 2024 and Techfest 2024 as technical committee.",
   },
 ] as const;
 
