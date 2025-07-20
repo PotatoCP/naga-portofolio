@@ -1,6 +1,3 @@
-import React from "react";
-import Modal from "react-modal";
-
 interface ItemCardProps {
   desc: string;
   itemKey: string;
@@ -16,7 +13,9 @@ export default function ItemCard({ desc, itemKey }: ItemCardProps) {
 
   function openModal() {
     console.log("Opening modal for:", dialogId);
-    const dialog = document.getElementById(dialogId);
+    const dialog = document.getElementById(
+      dialogId
+    ) as HTMLDialogElement | null;
     if (!dialog) return;
     playSound();
     dialog.showModal();
