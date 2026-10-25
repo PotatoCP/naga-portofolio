@@ -1,20 +1,29 @@
-import SocialMediaItem from "./social-media-item";
+---
+import SocialMediaItem from "./SocialMediaItem.astro";
+---
 
-export default function SocialMedia() {
-  return (
-    <div>
+<nav aria-label="Social media">
+  <ul class="flex items-center gap-4">
+    <li>
       <SocialMediaItem
         href="https://github.com/PotatoCP"
         iconClass="nes-icon github is-medium"
+        label="GitHub profile"
       />
+    </li>
+    <li>
       <SocialMediaItem
         href="https://www.linkedin.com/in/kenzie-raditya-tirtarahardja-b93760192/"
         iconClass="nes-icon linkedin is-medium"
+        label="LinkedIn profile"
       />
+    </li>
+    <li>
       <SocialMediaItem
         href="https://www.instagram.com/ken_murd/"
         iconClass="nes-icon instagram is-medium"
+        label="Instagram profile"
       />
-    </div>
-  );
-}
+    </li>
+  </ul>
+</nav>

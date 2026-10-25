@@ -1,0 +1,102 @@
+---
+import { getCollection, render } from "astro:content";
+import PortfolioItem from "./PortfolioItem.astro";
+import PortfolioSection from "./PortfolioSection.astro";
+
+const byOrder = <T extends { data: { order: number } }>(a: T, b: T) =>
+  a.data.order - b.data.order;
+
+const experiences = (
+  await getCollection("experiences", ({ data }) => !data.draft)
+).sort(byOrder);
+const achievements = (
+  await getCollection("achievements", ({ data }) => !data.draft)
+).sort(byOrder);
+const education = (
+  await getCollection("education", ({ data }) => !data.draft)
+).sort(byOrder);
+
+const renderedExperiences = await Promise.all(
+  experiences.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  })),
+);
+---
+
+<main
+  class="row-start-2 flex w-full flex-col items-center space-y-7 sm:items-start"
+>
+  <PortfolioSection title="Experience">
+    {
+      renderedExperiences.map(({ entry, Content }) => {
+        const itemId = `experience-${entry.id}`;
+        const dialogId = `${itemId}-dialog`;
+
+        return (
+          <PortfolioItem
+            id={itemId}
+            title={entry.data.title}
+            metaLabel="Period"
+            metaValue={entry.data.period}
+          >
+            <button
+              type="button"
+              class="nes-btn mt-3"
+              data-dialog-open={dialogId}
+            >
+              See details
+            </button>
+            <dialog
+              class="nes-dialog fixed left-1/2 top-1/2 z-50 max-h-[calc(100vh-2rem)] w-[min(42rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 overflow-auto"
+              id={dialogId}
+              aria-labelledby={`${dialogId}-title`}
+              data-portfolio-dialog
+            >
+              <form method="dialog" class="m-0">
+                <h3 id={`${dialogId}-title`} class="title">Description</h3>
+                <div class="dialog-body">
+                  <Content />
+                </div>
+                <button
+                  type="submit"
+                  value="close"
+                  class="nes-btn mt-4"
+                  data-dialog-close
+                >
+                  Cool
+                </button>
+              </form>
+            </dialog>
+          </PortfolioItem>
+        );
+      })
+    }
+  </PortfolioSection>
+
+  <PortfolioSection title="Achievement">
+    {
+      achievements.map((entry) => (
+        <PortfolioItem
+          id={`achievement-${entry.id}`}
+          title={entry.data.title}
+          metaLabel="Time"
+          metaValue={entry.data.time}
+        />
+      ))
+    }
+  </PortfolioSection>
+
+  <PortfolioSection title="Education">
+    {
+      education.map((entry) => (
+        <PortfolioItem
+          id={`education-${entry.id}`}
+          title={entry.data.institution}
+          metaLabel="Period"
+          metaValue={entry.data.period}
+        />
+      ))
+    }
+  </PortfolioSection>
+</main>

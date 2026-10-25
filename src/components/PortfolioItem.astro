@@ -1,0 +1,43 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  metaLabel: string;
+  metaValue: string;
+}
+
+const { id, title, metaLabel, metaValue } = Astro.props;
+const contentId = `${id}-content`;
+---
+
+<article class="portfolio-item mb-3" data-portfolio-item>
+  <button
+    type="button"
+    class="portfolio-trigger dropdown-label inline-flex items-start text-left"
+    aria-expanded="false"
+    aria-controls={contentId}
+    data-disclosure-button
+  >
+    <span class="dropdown-arrow mr-2 inline-block" aria-hidden="true">
+      <img
+        width="16"
+        height="16"
+        src="/arrow.png"
+        alt=""
+        class="inline-block h-[1em] w-[1em] object-contain align-middle transition-transform duration-200"
+        data-disclosure-arrow
+      />
+    </span>
+    <strong>{title}</strong>
+  </button>
+
+  <div
+    id={contentId}
+    class="dropdown-content mt-3"
+    data-disclosure-content
+    hidden
+  >
+    <p class="text-sm">{metaLabel}: {metaValue}</p>
+    <slot />
+  </div>
+</article>
