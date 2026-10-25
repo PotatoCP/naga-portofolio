@@ -52,7 +52,7 @@ dialog::backdrop {
   background: rgb(0 0 0 / 30%);
 }
 
-.experience-dialog {
+.detail-dialog {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -65,21 +65,21 @@ dialog::backdrop {
   transform: translate(-50%, -50%);
 }
 
-.experience-dialog__form {
+.detail-dialog__form {
   margin: 0;
 }
 
-.experience-dialog__header,
-.experience-dialog__description,
-.experience-dialog__footer {
+.detail-dialog__header,
+.detail-dialog__description,
+.detail-dialog__footer {
   padding: 1.5rem;
 }
 
-.experience-dialog__header {
+.detail-dialog__header {
   border-bottom: 4px solid currentColor;
 }
 
-.experience-dialog__eyebrow {
+.detail-dialog__eyebrow {
   margin: 0 0 0.75rem;
   color: #d95763;
   font-size: 0.65rem;
@@ -87,26 +87,26 @@ dialog::backdrop {
   text-transform: uppercase;
 }
 
-.experience-dialog__title {
+.detail-dialog__title {
   margin: 0;
   font-size: clamp(1rem, 3vw, 1.35rem);
   line-height: 1.6;
 }
 
-.experience-dialog__meta {
+.detail-dialog__meta {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   gap: 1rem;
   margin: 1.5rem 0 0;
 }
 
-.experience-dialog__meta-item {
+.detail-dialog__meta-item {
   padding: 0.9rem 1rem;
   border: 4px solid currentColor;
   box-shadow: 4px 4px 0 currentColor;
 }
 
-.experience-dialog__meta-item dt {
+.detail-dialog__meta-item dt {
   margin-bottom: 0.5rem;
   color: #209cee;
   font-size: 0.6rem;
@@ -114,70 +114,71 @@ dialog::backdrop {
   text-transform: uppercase;
 }
 
-.experience-dialog__meta-item dd {
+.detail-dialog__meta-item dd {
   margin: 0;
   font-size: 0.7rem;
   line-height: 1.75;
 }
 
-.experience-dialog__description h4 {
-  margin: 0 0 1rem;
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-.experience-dialog__body {
-  font-size: 0.72rem;
-  line-height: 1.9;
-}
-
-.experience-dialog__body > :first-child {
-  margin-top: 0;
-}
-
-.experience-dialog__body > :last-child {
-  margin-bottom: 0;
-}
-
-.experience-dialog__body p {
-  margin: 0 0 1.25rem;
-}
-
-.experience-dialog__body ul,
-.experience-dialog__body ol {
-  margin: 0 0 1.25rem;
-  padding-left: 1.75rem;
-}
-
-.experience-dialog__body ul {
-  list-style-type: square;
-}
-
-.experience-dialog__body li + li {
-  margin-top: 0.75rem;
-}
-
-.experience-dialog__body a {
+.detail-dialog__meta-item a,
+.detail-dialog__body a {
   color: #209cee;
   text-decoration: underline;
   text-underline-offset: 0.25rem;
 }
 
-.experience-dialog__footer {
+.detail-dialog__description h4 {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.detail-dialog__body {
+  font-size: 0.72rem;
+  line-height: 1.9;
+}
+
+.detail-dialog__body > :first-child {
+  margin-top: 0;
+}
+
+.detail-dialog__body > :last-child {
+  margin-bottom: 0;
+}
+
+.detail-dialog__body p {
+  margin: 0 0 1.25rem;
+}
+
+.detail-dialog__body ul,
+.detail-dialog__body ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.75rem;
+}
+
+.detail-dialog__body ul {
+  list-style-type: square;
+}
+
+.detail-dialog__body li + li {
+  margin-top: 0.75rem;
+}
+
+.detail-dialog__footer {
   display: flex;
   justify-content: flex-end;
   padding-top: 0;
 }
 
 @media (max-width: 40rem) {
-  .experience-dialog__header,
-  .experience-dialog__description,
-  .experience-dialog__footer {
+  .detail-dialog__header,
+  .detail-dialog__description,
+  .detail-dialog__footer {
     padding-right: 1rem;
     padding-left: 1rem;
   }
 
-  .experience-dialog__meta {
+  .detail-dialog__meta {
     grid-template-columns: 1fr;
   }
 }

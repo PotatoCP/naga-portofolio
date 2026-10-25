@@ -1,0 +1,76 @@
+---
+interface MetadataItem {
+  label: string;
+  value: string;
+  href?: string;
+}
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  metadata?: MetadataItem[];
+}
+
+const { id, eyebrow, title, metadata = [] } = Astro.props;
+const titleId = `${id}-title`;
+const descriptionId = `${id}-description`;
+---
+
+<button type="button" class="nes-btn mt-3" data-dialog-open={id}>
+  See details
+</button>
+
+<dialog
+  id={id}
+  class="nes-dialog detail-dialog"
+  aria-labelledby={titleId}
+  aria-describedby={descriptionId}
+  data-portfolio-dialog
+>
+  <form method="dialog" class="detail-dialog__form">
+    <header class="detail-dialog__header">
+      <p class="detail-dialog__eyebrow">{eyebrow}</p>
+      <h3 id={titleId} class="detail-dialog__title">{title}</h3>
+
+      {
+        metadata.length > 0 && (
+          <dl class="detail-dialog__meta">
+            {metadata.map((item) => (
+              <div class="detail-dialog__meta-item">
+                <dt>{item.label}</dt>
+                <dd>
+                  {item.href ? (
+                    <a href={item.href} target="_blank" rel="noreferrer">
+                      {item.value}
+                    </a>
+                  ) : (
+                    item.value
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+    </header>
+
+    <section id={descriptionId} class="detail-dialog__description">
+      <h4>Description</h4>
+      <div class="detail-dialog__body">
+        <slot />
+      </div>
+    </section>
+
+    <footer class="detail-dialog__footer">
+      <button
+        type="submit"
+        value="close"
+        class="nes-btn is-primary"
+        data-dialog-close
+      >
+        Cool!
+      </button>
+    </footer>
+  </form>
+</dialog>

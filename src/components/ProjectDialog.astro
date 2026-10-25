@@ -1,0 +1,25 @@
+---
+import DetailDialog from "./DetailDialog.astro";
+
+interface Props {
+  id: string;
+  title: string;
+  kind: string;
+  link: string;
+  linkLabel: string;
+}
+
+const { id, title, kind, link, linkLabel } = Astro.props;
+---
+
+<DetailDialog
+  id={id}
+  eyebrow="Project details"
+  title={title}
+  metadata={[
+    { label: "Type", value: kind },
+    { label: "Source", value: linkLabel, href: link },
+  ]}
+>
+  <slot />
+</DetailDialog>

@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import ExperienceDialog from "./ExperienceDialog.astro";
 import PortfolioItem from "./PortfolioItem.astro";
 import PortfolioSection from "./PortfolioSection.astro";
+import ProjectDialog from "./ProjectDialog.astro";
 
 const byOrder = <T extends { data: { order: number } }>(a: T, b: T) =>
   a.data.order - b.data.order;
@@ -13,12 +14,21 @@ const experiences = (
 const achievements = (
   await getCollection("achievements", ({ data }) => !data.draft)
 ).sort(byOrder);
+const projects = (
+  await getCollection("projects", ({ data }) => !data.draft)
+).sort(byOrder);
 const education = (
   await getCollection("education", ({ data }) => !data.draft)
 ).sort(byOrder);
 
 const renderedExperiences = await Promise.all(
   experiences.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  })),
+);
+const renderedProjects = await Promise.all(
+  projects.map(async (entry) => ({
     entry,
     Content: (await render(entry)).Content,
   })),
@@ -49,6 +59,34 @@ const renderedExperiences = await Promise.all(
             >
               <Content />
             </ExperienceDialog>
+          </PortfolioItem>
+        );
+      })
+    }
+  </PortfolioSection>
+
+  <PortfolioSection title="Projects">
+    {
+      renderedProjects.map(({ entry, Content }) => {
+        const itemId = `project-${entry.id}`;
+        const dialogId = `${itemId}-dialog`;
+
+        return (
+          <PortfolioItem
+            id={itemId}
+            title={entry.data.title}
+            metaLabel="Type"
+            metaValue={entry.data.kind}
+          >
+            <ProjectDialog
+              id={dialogId}
+              title={entry.data.title}
+              kind={entry.data.kind}
+              link={entry.data.link}
+              linkLabel={entry.data.linkLabel}
+            >
+              <Content />
+            </ProjectDialog>
           </PortfolioItem>
         );
       })

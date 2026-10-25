@@ -34,6 +34,20 @@ const achievements = defineCollection({
   }),
 });
 
+const projects = defineCollection({
+  loader: glob({
+    base: "./src/content/projects",
+    pattern: "**/*.md",
+  }),
+  schema: z.object({
+    ...commonFields,
+    title: z.string(),
+    kind: z.string(),
+    link: z.url(),
+    linkLabel: z.string(),
+  }),
+});
+
 const education = defineCollection({
   loader: glob({
     base: "./src/content/education",
@@ -47,4 +61,4 @@ const education = defineCollection({
   }),
 });
 
-export const collections = { experiences, achievements, education };
+export const collections = { experiences, projects, achievements, education };
