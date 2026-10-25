@@ -5,4 +5,6 @@ order: 1
 featured: true
 ---
 
-Joined Huawei HKRC Web Engine team. Gained and utilized the skill of Rust programming language and parallelization.
+As a research intern on Huawei HKRC's Web Engine team, I learned how web engines are structured and how their components work together to process web content.
+
+I gained hands-on experience contributing to a large Rust-based codebase while strengthening my skills in Rust, parallelization, and systems-level problem-solving.
