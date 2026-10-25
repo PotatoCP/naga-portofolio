@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import ExperienceDialog from "./ExperienceDialog.astro";
 import PortfolioItem from "./PortfolioItem.astro";
 import PortfolioSection from "./PortfolioSection.astro";
 
@@ -40,34 +41,14 @@ const renderedExperiences = await Promise.all(
             metaLabel="Period"
             metaValue={entry.data.period}
           >
-            <button
-              type="button"
-              class="nes-btn mt-3"
-              data-dialog-open={dialogId}
-            >
-              See details
-            </button>
-            <dialog
-              class="nes-dialog fixed left-1/2 top-1/2 z-50 max-h-[calc(100vh-2rem)] w-[min(42rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 overflow-auto"
+            <ExperienceDialog
               id={dialogId}
-              aria-labelledby={`${dialogId}-title`}
-              data-portfolio-dialog
+              title={entry.data.title}
+              period={entry.data.period}
+              location={entry.data.location}
             >
-              <form method="dialog" class="m-0">
-                <h3 id={`${dialogId}-title`} class="title">Description</h3>
-                <div class="dialog-body">
-                  <Content />
-                </div>
-                <button
-                  type="submit"
-                  value="close"
-                  class="nes-btn mt-4"
-                  data-dialog-close
-                >
-                  Cool
-                </button>
-              </form>
-            </dialog>
+              <Content />
+            </ExperienceDialog>
           </PortfolioItem>
         );
       })

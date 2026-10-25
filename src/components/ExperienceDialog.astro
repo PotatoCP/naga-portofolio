@@ -1,0 +1,64 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  period: string;
+  location?: string;
+}
+
+const { id, title, period, location } = Astro.props;
+const titleId = `${id}-title`;
+const descriptionId = `${id}-description`;
+---
+
+<button type="button" class="nes-btn mt-3" data-dialog-open={id}>
+  See details
+</button>
+
+<dialog
+  id={id}
+  class="nes-dialog experience-dialog"
+  aria-labelledby={titleId}
+  aria-describedby={descriptionId}
+  data-portfolio-dialog
+>
+  <form method="dialog" class="experience-dialog__form">
+    <header class="experience-dialog__header">
+      <p class="experience-dialog__eyebrow">Experience details</p>
+      <h3 id={titleId} class="experience-dialog__title">{title}</h3>
+
+      <dl class="experience-dialog__meta">
+        <div class="experience-dialog__meta-item">
+          <dt>Period</dt>
+          <dd>{period}</dd>
+        </div>
+        {
+          location && (
+            <div class="experience-dialog__meta-item">
+              <dt>Location</dt>
+              <dd>{location}</dd>
+            </div>
+          )
+        }
+      </dl>
+    </header>
+
+    <section id={descriptionId} class="experience-dialog__description">
+      <h4>Description</h4>
+      <div class="experience-dialog__body">
+        <slot />
+      </div>
+    </section>
+
+    <footer class="experience-dialog__footer">
+      <button
+        type="submit"
+        value="close"
+        class="nes-btn is-primary"
+        data-dialog-close
+      >
+        Cool!
+      </button>
+    </footer>
+  </form>
+</dialog>
