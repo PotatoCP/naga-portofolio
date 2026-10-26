@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import SiteShell from "../../components/SiteShell.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const posts = (
+  await getCollection("blog", ({ data }) => !data.draft)
+).sort(
+  (a, b) => b.data.published.getTime() - a.data.published.getTime(),
+);
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+---
+
+<Layout
+  title="Blog | Kenzie Raditya Tirtarahardja"
+  description="Notes from Kenzie Raditya Tirtarahardja about software engineering, backend systems, and the web."
+>
+  <SiteShell activePage="blog">
+    <div class="blog-page">
+      <header class="blog-hero">
+        <p class="blog-eyebrow">Field notes / 02</p>
+        <h1>Blog</h1>
+        <p>
+          Notes on backend engineering, systems, competitive programming, and
+          things I learn while building software.
+        </p>
+      </header>
+
+      <main aria-label="Blog posts">
+        {
+          posts.length > 0 ? (
+            <div class="blog-list">
+              {posts.map((post, index) => (
+                <article class="blog-card">
+                  <a href={`/blog/${post.id}`} class="blog-card__link">
+                    <span class="blog-card__number" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div class="blog-card__content">
+                      <div class="blog-card__meta">
+                        <time datetime={post.data.published.toISOString()}>
+                          {formatDate(post.data.published)}
+                        </time>
+                        <span>{post.data.tags.join(" / ")}</span>
+                      </div>
+                      <h2>{post.data.title}</h2>
+                      <p>{post.data.description}</p>
+                      <span class="blog-card__action">Read article →</span>
+                    </div>
+                  </a>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div class="nes-container blog-empty">
+              <p>No posts yet. New field notes will appear here.</p>
+            </div>
+          )
+        }
+      </main>
+
+      <Footer />
+    </div>
+  </SiteShell>
+</Layout>

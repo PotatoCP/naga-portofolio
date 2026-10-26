@@ -48,6 +48,21 @@ const projects = defineCollection({
   }),
 });
 
+const blog = defineCollection({
+  loader: glob({
+    base: "./src/content/blog",
+    pattern: "**/*.md",
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    published: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const education = defineCollection({
   loader: glob({
     base: "./src/content/education",
@@ -61,4 +76,10 @@ const education = defineCollection({
   }),
 });
 
-export const collections = { experiences, projects, achievements, education };
+export const collections = {
+  experiences,
+  projects,
+  blog,
+  achievements,
+  education,
+};

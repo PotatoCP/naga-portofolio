@@ -1,0 +1,69 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import SiteShell from "../../components/SiteShell.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+---
+
+<Layout title={`${post.data.title} | Kenzie Raditya`} description={post.data.description}>
+  <SiteShell activePage="blog">
+    <div class="blog-page blog-page--article">
+      <main>
+        <a href="/blog" class="blog-back" data-sound="heavy">← All posts</a>
+
+        <article class="blog-post">
+          <header class="blog-post__header">
+            <p class="blog-eyebrow">Field note</p>
+            <h1>{post.data.title}</h1>
+            <p class="blog-post__description">{post.data.description}</p>
+            <div class="blog-post__meta">
+              <time datetime={post.data.published.toISOString()}>
+                Published {formatDate(post.data.published)}
+              </time>
+              {
+                post.data.updated && (
+                  <time datetime={post.data.updated.toISOString()}>
+                    Updated {formatDate(post.data.updated)}
+                  </time>
+                )
+              }
+            </div>
+            <ul class="blog-tags" aria-label="Tags">
+              {post.data.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          </header>
+
+          <div class="blog-prose">
+            <Content />
+          </div>
+        </article>
+      </main>
+
+      <Footer />
+    </div>
+  </SiteShell>
+</Layout>

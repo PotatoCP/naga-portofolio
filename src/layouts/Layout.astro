@@ -1,5 +1,6 @@
 ---
 import "@fontsource/press-start-2p/400.css";
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 
 interface Props {
@@ -22,8 +23,10 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body>
     <slot />
+    <script src="../scripts/portfolio-interactions.ts"></script>
   </body>
 </html>

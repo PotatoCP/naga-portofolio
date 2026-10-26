@@ -2,17 +2,18 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import PortfolioContent from "../components/PortfolioContent.astro";
+import SiteShell from "../components/SiteShell.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <div
-    class="grid min-h-screen grid-rows-[auto_1fr_auto] items-center justify-items-center gap-16 p-8 pb-20 sm:p-20"
-  >
-    <Header />
-    <PortfolioContent />
-    <Footer />
-  </div>
+  <SiteShell activePage="main">
+    <div
+      class="grid min-h-screen grid-rows-[auto_1fr_auto] items-center justify-items-center gap-16 p-8 pb-20 sm:p-20"
+    >
+      <Header />
+      <PortfolioContent />
+      <Footer />
+    </div>
+  </SiteShell>
 </Layout>
-
-<script src="../scripts/portfolio-interactions.ts"></script>

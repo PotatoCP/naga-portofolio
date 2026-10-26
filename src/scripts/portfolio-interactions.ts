@@ -4,6 +4,7 @@ const prefersReducedMotion = window.matchMedia(
 
 const disclosureAnimations = new WeakMap<HTMLElement, Animation>();
 const dialogTriggers = new WeakMap<HTMLDialogElement, HTMLButtonElement>();
+const initializedDialogs = new WeakSet<HTMLDialogElement>();
 
 function playSound(source: string) {
   const sound = new Audio(source);
@@ -99,16 +100,26 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  if (target.closest('[data-sound="heavy"]')) {
-    playSound("/button-heavy.mp3");
+  const soundTarget = target.closest<HTMLElement>("[data-sound]");
+  if (soundTarget) {
+    const usesLightSound = soundTarget.dataset.sound === "light";
+    playSound(usesLightSound ? "/button.mp3" : "/button-heavy.mp3");
   }
 });
 
-document.querySelectorAll<HTMLDialogElement>("[data-portfolio-dialog]").forEach(
-  (dialog) => {
-    dialog.addEventListener("close", () => {
-      dialogTriggers.get(dialog)?.focus();
-      dialogTriggers.delete(dialog);
+function initializeDialogs() {
+  document
+    .querySelectorAll<HTMLDialogElement>("[data-portfolio-dialog]")
+    .forEach((dialog) => {
+      if (initializedDialogs.has(dialog)) return;
+      initializedDialogs.add(dialog);
+
+      dialog.addEventListener("close", () => {
+        dialogTriggers.get(dialog)?.focus();
+        dialogTriggers.delete(dialog);
+      });
     });
-  },
-);
+}
+
+initializeDialogs();
+document.addEventListener("astro:page-load", initializeDialogs);

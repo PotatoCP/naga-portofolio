@@ -1,0 +1,39 @@
+---
+interface Props {
+  activePage: "main" | "blog";
+}
+
+const { activePage } = Astro.props;
+
+const navigation = [
+  { label: "Main", href: "/", page: "main" },
+  { label: "Blog", href: "/blog", page: "blog" },
+] as const;
+---
+
+<div class="site-shell">
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="site-nav__tabs">
+      {
+        navigation.map((item) => {
+          const isActive = item.page === activePage;
+
+          return (
+            <a
+              href={item.href}
+              class:list={["site-nav__link", { "is-active": isActive }]}
+              aria-current={isActive ? "page" : undefined}
+              data-sound="light"
+            >
+              <span>{item.label}</span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </nav>
+
+  <div class="site-shell__content">
+    <slot />
+  </div>
+</div>
