@@ -29,8 +29,7 @@ const formatDate = (date: Date) =>
         <p class="blog-eyebrow">Field notes / 02</p>
         <h1>Blog</h1>
         <p>
-          Notes on backend engineering, systems, competitive programming, and
-          things I learn while building software.
+          Notes on everything that comes to my mind.
         </p>
       </header>
 
@@ -40,7 +39,11 @@ const formatDate = (date: Date) =>
             <div class="blog-list">
               {posts.map((post, index) => (
                 <article class="blog-card">
-                  <a href={`/blog/${post.id}`} class="blog-card__link">
+                  <a
+                    href={`/blog/${post.id}`}
+                    class="blog-card__link"
+                    data-sound="paper"
+                  >
                     <span class="blog-card__number" aria-hidden="true">
                       {String(index + 1).padStart(2, "0")}
                     </span>

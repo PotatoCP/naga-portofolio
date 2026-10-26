@@ -102,8 +102,13 @@ document.addEventListener("click", (event) => {
 
   const soundTarget = target.closest<HTMLElement>("[data-sound]");
   if (soundTarget) {
-    const usesLightSound = soundTarget.dataset.sound === "light";
-    playSound(usesLightSound ? "/button.mp3" : "/button-heavy.mp3");
+    const soundSource =
+      soundTarget.dataset.sound === "light"
+        ? "/button.mp3"
+        : soundTarget.dataset.sound === "paper"
+          ? "/paper.mp3"
+          : "/button-heavy.mp3";
+    playSound(soundSource);
   }
 });
 

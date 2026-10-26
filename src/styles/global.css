@@ -340,8 +340,9 @@ body {
 
 .blog-prose {
   padding: clamp(1.5rem, 5vw, 3rem);
-  font-size: 0.72rem;
-  line-height: 2;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 .blog-prose > :first-child {
@@ -374,6 +375,7 @@ body {
 .blog-prose h2,
 .blog-prose h3 {
   margin: 2.5rem 0 1rem;
+  font-family: "Press Start 2P", monospace;
   line-height: 1.6;
 }
 
@@ -397,6 +399,8 @@ body {
     var(--palette-navy) 16%,
     var(--background)
   );
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.9em;
 }
 
 .blog-prose pre {
