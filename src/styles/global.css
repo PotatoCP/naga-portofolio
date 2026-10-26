@@ -2,20 +2,17 @@
 @import "nes.css/css/nes.min.css" layer(components);
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --palette-black: #000000;
+  --palette-navy: #233d4d;
+  --palette-orange: #fe7f2d;
+  --palette-paper: #eaecf0;
+  --background: var(--palette-paper);
+  --foreground: var(--palette-black);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html {
@@ -29,6 +26,80 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Press Start 2P", monospace;
+}
+
+::selection {
+  background: var(--palette-orange);
+  color: var(--palette-black);
+}
+
+.nes-container,
+.nes-dialog {
+  border-color: var(--palette-black);
+  background: var(--palette-paper);
+  color: var(--palette-black);
+}
+
+.nes-container.with-title > .title {
+  background-color: var(--palette-paper);
+}
+
+.nes-btn {
+  background-color: var(--palette-paper);
+  color: var(--palette-black);
+}
+
+.nes-btn::after {
+  box-shadow: inset -4px -4px var(--palette-navy);
+}
+
+.nes-btn:hover,
+.nes-btn:focus-visible {
+  background-color: var(--palette-orange);
+  color: var(--palette-black);
+}
+
+.nes-btn:hover::after {
+  box-shadow: inset -6px -6px var(--palette-navy);
+}
+
+.nes-btn:focus-visible {
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--palette-navy) 30%, transparent);
+}
+
+.nes-btn:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+.nes-btn:active:not(.is-disabled)::after {
+  box-shadow: inset 4px 4px var(--palette-navy);
+}
+
+.nes-btn.is-primary {
+  background-color: var(--palette-navy);
+  color: var(--palette-paper);
+}
+
+.nes-btn.is-primary::after {
+  box-shadow: inset -4px -4px var(--palette-black);
+}
+
+.nes-btn.is-primary:hover,
+.nes-btn.is-primary:focus-visible {
+  background-color: var(--palette-orange);
+  color: var(--palette-black);
+}
+
+.nes-btn.is-primary:hover::after {
+  box-shadow: inset -6px -6px var(--palette-black);
+}
+
+.nes-btn.is-primary:focus-visible {
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--palette-orange) 35%, transparent);
+}
+
+.nes-btn.is-primary:active:not(.is-disabled)::after {
+  box-shadow: inset 4px 4px var(--palette-black);
 }
 
 .site-shell {
@@ -56,12 +127,12 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0.85rem 0.7rem;
-  border: 4px solid #111;
+  border: 4px solid var(--palette-black);
   border-left: 0;
   border-radius: 0 1.15rem 1.15rem 0;
-  background: #f25022;
-  box-shadow: 4px 4px 0 #111;
-  color: #111;
+  background: var(--palette-paper);
+  box-shadow: 4px 4px 0 var(--palette-black);
+  color: var(--palette-black);
   font-size: 0.65rem;
   line-height: 1;
   text-decoration: none;
@@ -81,9 +152,14 @@ body {
   transform: translateX(0);
 }
 
+.site-nav__link:not(.is-active):hover,
+.site-nav__link:not(.is-active):focus-visible {
+  background: #ffffff;
+}
+
 .site-nav__link.is-active {
   z-index: 1;
-  background: #f5f5f5;
+  background: var(--palette-orange);
 }
 
 .site-shell__content {
@@ -112,13 +188,13 @@ body {
   bottom: -8px;
   width: 22%;
   height: 8px;
-  background: #d95763;
+  background: var(--palette-orange);
   content: "";
 }
 
 .blog-eyebrow {
   margin: 0 0 1rem;
-  color: #d95763;
+  color: var(--palette-orange);
   font-size: 0.6rem;
   line-height: 1.6;
   text-transform: uppercase;
@@ -160,7 +236,7 @@ body {
   place-items: start center;
   padding-top: 1.75rem;
   border-right: 4px solid currentColor;
-  color: #d95763;
+  color: var(--palette-orange);
   font-size: 0.75rem;
 }
 
@@ -173,7 +249,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.75rem;
-  color: #209cee;
+  color: var(--palette-navy);
   font-size: 0.5rem;
   line-height: 1.7;
   text-transform: uppercase;
@@ -195,12 +271,12 @@ body {
 .blog-card__action {
   display: inline-block;
   margin-top: 1.25rem;
-  color: #d95763;
+  color: var(--palette-orange);
   font-size: 0.6rem;
 }
 
 .blog-card__link:hover .blog-card__action {
-  color: #209cee;
+  color: var(--palette-navy);
 }
 
 .blog-empty {
@@ -214,7 +290,7 @@ body {
 .blog-back {
   display: inline-block;
   margin-bottom: 2rem;
-  color: #209cee;
+  color: var(--palette-navy);
   font-size: 0.65rem;
   line-height: 1.6;
   text-underline-offset: 0.3rem;
@@ -239,7 +315,7 @@ body {
   flex-wrap: wrap;
   gap: 1rem 2rem;
   margin-top: 1.5rem;
-  color: #209cee;
+  color: var(--palette-navy);
   font-size: 0.55rem;
   line-height: 1.7;
   text-transform: uppercase;
@@ -256,8 +332,8 @@ body {
 
 .blog-tags li {
   padding: 0.55rem 0.75rem;
-  background: #209cee;
-  color: #fff;
+  background: var(--palette-navy);
+  color: var(--palette-paper);
   font-size: 0.5rem;
   line-height: 1.4;
 }
@@ -310,13 +386,17 @@ body {
 }
 
 .blog-prose a {
-  color: #209cee;
+  color: var(--palette-navy);
   text-underline-offset: 0.25rem;
 }
 
 .blog-prose code {
   padding: 0.15rem 0.3rem;
-  background: color-mix(in srgb, #209cee 16%, var(--background));
+  background: color-mix(
+    in srgb,
+    var(--palette-navy) 16%,
+    var(--background)
+  );
 }
 
 .blog-prose pre {
@@ -384,7 +464,7 @@ dialog::backdrop {
 
 .detail-dialog__eyebrow {
   margin: 0 0 0.75rem;
-  color: #d95763;
+  color: var(--palette-orange);
   font-size: 0.65rem;
   line-height: 1.5;
   text-transform: uppercase;
@@ -411,7 +491,7 @@ dialog::backdrop {
 
 .detail-dialog__meta-item dt {
   margin-bottom: 0.5rem;
-  color: #209cee;
+  color: var(--palette-navy);
   font-size: 0.6rem;
   line-height: 1.5;
   text-transform: uppercase;
@@ -425,7 +505,7 @@ dialog::backdrop {
 
 .detail-dialog__meta-item a,
 .detail-dialog__body a {
-  color: #209cee;
+  color: var(--palette-navy);
   text-decoration: underline;
   text-underline-offset: 0.25rem;
 }
@@ -526,15 +606,6 @@ dialog::backdrop {
 
   .blog-card__content {
     padding: 1.25rem;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .nes-container,
-  .nes-dialog {
-    border-color: var(--foreground);
-    background: var(--background);
-    color: var(--foreground);
   }
 }
 
